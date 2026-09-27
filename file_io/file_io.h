@@ -1,4 +1,4 @@
 #include<stdio.h>
 #include<string.h>
 
-int read_file(char *file_path);
+int read_file(FILE *data_file, char *time_stamp, double *temperature);

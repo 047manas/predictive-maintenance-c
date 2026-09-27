@@ -1,4 +1,4 @@
-#include<circular_queue.h>
+#include "circular_queue.h"
 
 CircularBuffer* initalize_queue(void)
 {
@@ -10,7 +10,7 @@ CircularBuffer* initalize_queue(void)
 
 }
 
-void enqueue(CircularBuffer *circular_buffer ,float data)
+void enqueue(CircularBuffer *circular_buffer ,double* data)
 {
 
     if(circular_buffer->head == -1)
@@ -27,7 +27,7 @@ void enqueue(CircularBuffer *circular_buffer ,float data)
 
     }
     
-    circular_buffer->buffer[circular_buffer->head] = data;
+    circular_buffer->buffer[circular_buffer->head] = *data;
     if(circular_buffer->buffer_size < SIZE)
         circular_buffer->buffer_size++;
 
