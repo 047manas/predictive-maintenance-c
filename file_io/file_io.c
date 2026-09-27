@@ -8,3 +8,9 @@ int read_file(FILE *data_file, char *time_stamp, double *temperature)
     return fscanf(data_file, " %19[^,],%lf\n", time_stamp, temperature) == 2;
 
 }
+
+int file_write(FILE *output_file, double temperature, char *time_stamp)
+{
+    fprintf(output_file, "%s,%.2f\n", time_stamp, temperature);
+    return 1;
+}

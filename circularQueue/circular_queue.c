@@ -1,6 +1,6 @@
 #include "circular_queue.h"
 
-CircularBuffer* initalize_queue(void)
+CircularBuffer* initialize_queue(void)
 {
 
     CircularBuffer* circular_buffer = (CircularBuffer*)malloc(sizeof(CircularBuffer));
