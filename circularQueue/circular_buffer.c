@@ -1,4 +1,4 @@
-#include "circular_queue.h"
+#include "circular_buffer.h"
 
 CircularBuffer* initialize_queue(void)
 {

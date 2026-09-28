@@ -1,4 +1,4 @@
-#include "circular_queue.h"
+#include "circular_buffer.h"
 #include "file_io.h"
 #include "statistics.h"
 
@@ -46,23 +46,22 @@ int main(void) {
     return 1;
   }
 
-  // reading file one row at a time and storing temperature in the queue
+  // reading file one row at a time and evaluating anomalies against the baseline
   while (read_file(data_file, time_stamp, &temperature)) {
-
-    enqueue(circular_buffer, &temperature);
 
     if (is_full(circular_buffer)) {
 
       median = get_median(circular_buffer);
       MAD = get_mad(circular_buffer, median); // median passed in — not recomputed
-      z_score = get_zscore(circular_buffer->buffer[circular_buffer->head],
-                           median, MAD);
+      z_score = get_zscore(temperature, median, MAD);
 
       if (z_score > THRESHOLD) {
         file_write(anomaly_file, temperature, time_stamp);
         anomaly_count++;
       }
     }
+
+    enqueue(circular_buffer, &temperature);
   }
 
   free(circular_buffer);

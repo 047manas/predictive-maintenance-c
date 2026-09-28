@@ -25,10 +25,10 @@ int partition(double *arr, int left, int right) {
 
   while (start < end && start < right && end >= 0) {
 
-    while (arr[pivot_index] > arr[start] && start < right)
+    while (start < right && arr[pivot_index] > arr[start])
       start++;
 
-    while (arr[pivot_index] <= arr[end] && end >= 0)
+    while (end >= 0 && arr[pivot_index] <= arr[end])
       end--;
 
     if (start < end && start < right && end >= 0) {

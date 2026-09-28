@@ -4,10 +4,16 @@
 double get_median(CircularBuffer* Circular_buffer)
 {
     double copy[SIZE];
-    memcpy(copy, Circular_buffer->buffer, sizeof(double) * Circular_buffer->buffer_size);
+    int n = Circular_buffer->buffer_size;
+    memcpy(copy, Circular_buffer->buffer, sizeof(double) * n);
 
-    return quickSelect(copy, 0, Circular_buffer->buffer_size - 1, Circular_buffer->buffer_size / 2);
-
+    if (n % 2 != 0) {
+        return quickSelect(copy, 0, n - 1, n / 2);
+    } else {
+        double m1 = quickSelect(copy, 0, n - 1, n / 2 - 1);
+        double m2 = quickSelect(copy, 0, n - 1, n / 2);
+        return (m1 + m2) / 2.0;
+    }
 }
 
 
@@ -15,14 +21,20 @@ double get_mad(CircularBuffer* circular_buffer, double median)
 {
     // median passed in from caller — no redundant recomputation
 
+    int n = circular_buffer->buffer_size;
     double temp[SIZE];
-    for(int i = 0; i < circular_buffer->buffer_size; i++)
+    for(int i = 0; i < n; i++)
     {
         temp[i] = fabs(circular_buffer->buffer[i] - median);
     }
 
-    return quickSelect(temp, 0, circular_buffer->buffer_size - 1, circular_buffer->buffer_size / 2);
-
+    if (n % 2 != 0) {
+        return quickSelect(temp, 0, n - 1, n / 2);
+    } else {
+        double m1 = quickSelect(temp, 0, n - 1, n / 2 - 1);
+        double m2 = quickSelect(temp, 0, n - 1, n / 2);
+        return (m1 + m2) / 2.0;
+    }
 }
 
 
